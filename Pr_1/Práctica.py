@@ -16,7 +16,7 @@ if __name__ == '__main__':
         for x in range(0, imgFinal_w):
             iterativeRes = 0
             for j in range(0, img_T.shape[1]):
-                for i in range(0, img_I.shape[0] - 1):
+                for i in range(0, img_I.shape[0]):
                     iterativeRes += (img_T[i, j] - img_I[x + i, y + j]) ** 2
             if iterativeRes > bigestError:
                 bigestError = iterativeRes
