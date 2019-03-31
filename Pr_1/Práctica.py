@@ -55,17 +55,14 @@ if __name__ == '__main__':
     text_width = size[0][0]
     text_height = size[0][1]
 
-    img = np.zeros((text_height + 30, text_width + 15, 3), np.uint8)
-    cv2.putText(img, text, (10, 100), cv2.FONT_HERSHEY_SIMPLEX, 4, color, 2, cv2.LINE_AA)
+    textImg = np.zeros((text_height + 30, text_width + 15, 3), np.uint8)
+    cv2.putText(textImg, text, (10, 100), cv2.FONT_HERSHEY_SIMPLEX, 4, color, 2, cv2.LINE_AA)
 
-    cv2.imshow("TextWindow", img)
-
-    if lowestError / bigestError < threshold:
-        print("TARGET FOUND")
-
+    # Show the images
     img_FINAL[:] = (img_FINAL[:] / bigestError * 255.0)
 
     cv2.imshow('Target Image', np.uint8(img_T_color))
     cv2.imshow('Input Image', np.uint8(img_I_color))
     cv2.imshow('Maching Map', np.uint8(img_FINAL))
+    cv2.imshow("TextWindow", textImg)
     cv2.waitKey(0)
