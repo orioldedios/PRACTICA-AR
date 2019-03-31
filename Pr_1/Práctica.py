@@ -40,11 +40,27 @@ if __name__ == '__main__':
                 cv2.rectangle(img_I_color, (x - 1, y - 1), (x + imgT_w, y + imgT_h), (0.0, 255.0, 0.0))
             img_FINAL[x, y] = iterativeRes
 
+
+    # Show the text window
+    text = "default"
+    if lowestError / bigestError < threshold:
+        text = "TARGET FOUND"
+    else:
+        text = "TARGET NOT FOUND"
+
+    size = cv2.getTextSize(text, cv2.FONT_HERSHEY_SIMPLEX, 4, 2)
+    text_width = size[0][0]
+    text_height = size[0][1]
+
+    img = np.zeros((text_height + 30, text_width + 15, 3), np.uint8)
+    cv2.putText(img, text, (10, 100), cv2.FONT_HERSHEY_SIMPLEX, 4, (255, 255, 255), 2, cv2.LINE_AA)
+
+    cv2.imshow("TextWindow", img)
+
     if lowestError / bigestError < threshold:
         print("TARGET FOUND")
 
     img_FINAL[:] = (img_FINAL[:] / bigestError * 255.0)
-
 
     cv2.imshow('Target Image', np.uint8(img_T_color))
     cv2.imshow('Input Image', np.uint8(img_I_color))
